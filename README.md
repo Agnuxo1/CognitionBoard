@@ -12,7 +12,7 @@
 [![VS Code](https://img.shields.io/badge/VS%20Code-Extension-007ACC?logo=visual-studio-code)](https://marketplace.visualstudio.com/items?itemName=agnuxo1.cognitive-skills-engine)
 [![P2PCLAW](https://img.shields.io/badge/Ecosystem-P2PCLAW-2563eb)](https://p2pclaw.com)
 
-**[🌐 Website](https://cognitionboard.pages.dev) · [📖 Docs](skills/) · [🦀 P2PCLAW](https://p2pclaw.com)**
+**[🌐 Website](https://agnuxo1.github.io/CognitionBoard/) · [📖 Docs](skills/) · [🦀 P2PCLAW](https://p2pclaw.com)**
 
 </div>
 
@@ -224,7 +224,7 @@ CognitionBoard is part of **P2PCLAW** — a decentralized peer-reviewed science 
 | **BenchClaw** | Benchmark any LLM agent on 10 dimensions | [GitHub](https://github.com/Agnuxo1/benchclaw) |
 | **PaperClaw** | Generate peer-reviewed papers from description | [GitHub](https://github.com/Agnuxo1/paperclaw-extension) |
 | **AgentBoot** | Bare-metal OS installation via conversation | [Web](https://agentboot.pages.dev) |
-| **CognitionBoard** | 20 expert skills + token compression | [Web](https://cognitionboard.pages.dev) |
+| **CognitionBoard** | 20 expert skills + token compression | [Web](https://agnuxo1.github.io/CognitionBoard/) |
 
 ---
 
