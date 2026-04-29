@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e293b"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#2563eb"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f97316"/>
+      <stop offset="100%" style="stop-color:#ea580c"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e"/>
+      <stop offset="100%" style="stop-color:#16a34a"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7"/>
+      <stop offset="100%" style="stop-color:#9333ea"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="64" fill="url(#bg)"/>
+
+  <!-- Board Grid -->
+  <g transform="translate(56, 56)" filter="url(#shadow)">
+    <!-- Row A - Blue -->
+    <rect x="0" y="0" width="60" height="60" rx="8" fill="url(#blue)" opacity="0.9"/>
+    <rect x="68" y="0" width="60" height="60" rx="8" fill="url(#blue)" opacity="0.85"/>
+    <rect x="136" y="0" width="60" height="60" rx="8" fill="url(#blue)" opacity="0.8"/>
+    <rect x="204" y="0" width="60" height="60" rx="8" fill="url(#blue)" opacity="0.75"/>
+    <rect x="272" y="0" width="60" height="60" rx="8" fill="url(#blue)" opacity="0.7"/>
+    <rect x="340" y="0" width="60" height="60" rx="8" fill="url(#blue)" opacity="0.65"/>
+
+    <!-- Row B - Orange -->
+    <rect x="0" y="68" width="60" height="60" rx="8" fill="url(#orange)" opacity="0.9"/>
+    <rect x="68" y="68" width="60" height="60" rx="8" fill="url(#orange)" opacity="0.85"/>
+    <rect x="136" y="68" width="60" height="60" rx="8" fill="url(#orange)" opacity="0.8"/>
+    <rect x="204" y="68" width="60" height="60" rx="8" fill="url(#orange)" opacity="0.75"/>
+    <rect x="272" y="68" width="60" height="60" rx="8" fill="url(#orange)" opacity="0.7"/>
+    <rect x="340" y="68" width="60" height="60" rx="8" fill="url(#orange)" opacity="0.65"/>
+
+    <!-- Row C - Green -->
+    <rect x="0" y="136" width="60" height="60" rx="8" fill="url(#green)" opacity="0.9"/>
+    <rect x="68" y="136" width="60" height="60" rx="8" fill="url(#green)" opacity="0.85"/>
+    <rect x="136" y="136" width="60" height="60" rx="8" fill="url(#green)" opacity="0.8"/>
+    <rect x="204" y="136" width="60" height="60" rx="8" fill="url(#green)" opacity="0.75"/>
+    <rect x="272" y="136" width="60" height="60" rx="8" fill="url(#green)" opacity="0.7"/>
+    <rect x="340" y="136" width="60" height="60" rx="8" fill="url(#green)" opacity="0.65"/>
+
+    <!-- Row D - Purple -->
+    <rect x="0" y="204" width="60" height="60" rx="8" fill="url(#purple)" opacity="0.9"/>
+    <rect x="68" y="204" width="60" height="60" rx="8" fill="url(#purple)" opacity="0.85"/>
+    <rect x="136" y="204" width="60" height="60" rx="8" fill="url(#purple)" opacity="0.8"/>
+    <rect x="204" y="204" width="60" height="60" rx="8" fill="url(#purple)" opacity="0.75"/>
+    <!-- D5 - Master - Highlighted -->
+    <rect x="272" y="204" width="60" height="60" rx="12" fill="#fbbf24" stroke="#f59e0b" stroke-width="3" filter="url(#glow)"/>
+    <rect x="340" y="204" width="60" height="60" rx="8" fill="url(#purple)" opacity="0.65"/>
+  </g>
+
+  <!-- Path Trace (Memory Path) -->
+  <path d="M 316 316 L 92 92 L 160 92 L 160 160 L 92 228 L 92 296 L 316 376" 
+        fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" 
+        stroke-dasharray="12 8" opacity="0.9" filter="url(#glow)"/>
+
+  <!-- Path dots -->
+  <circle cx="316" cy="316" r="6" fill="#fbbf24"/>
+  <circle cx="92" cy="92" r="6" fill="#fbbf24"/>
+  <circle cx="160" cy="92" r="6" fill="#fbbf24"/>
+  <circle cx="160" cy="160" r="6" fill="#fbbf24"/>
+  <circle cx="92" cy="228" r="6" fill="#fbbf24"/>
+  <circle cx="92" cy="296" r="6" fill="#fbbf24"/>
+  <circle cx="316" cy="376" r="6" fill="#fbbf24"/>
+
+  <!-- Symbols in cells -->
+  <text x="30" y="42" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">TC</text>
+  <text x="98" y="42" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">MM</text>
+  <text x="166" y="42" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">PH</text>
+  <text x="234" y="42" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">CH</text>
+  <text x="302" y="42" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">BI</text>
+  <text x="370" y="42" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">CS</text>
+
+  <text x="30" y="110" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">HI</text>
+  <text x="98" y="110" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">PHI</text>
+  <text x="166" y="110" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">PSY</text>
+  <text x="234" y="110" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">LIN</text>
+  <text x="302" y="110" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">GEO</text>
+  <text x="370" y="110" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">ECO</text>
+
+  <text x="30" y="178" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">POL</text>
+  <text x="98" y="178" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">LAW</text>
+  <text x="166" y="178" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">MED</text>
+  <text x="234" y="178" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">AST</text>
+  <text x="302" y="178" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">ENG</text>
+  <text x="370" y="178" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">ART</text>
+
+  <text x="30" y="246" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">ENV</text>
+  <text x="98" y="246" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">CUL</text>
+  <text x="166" y="246" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="white">SCI+</text>
+  <text x="234" y="246" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="white">HUM+</text>
+  <text x="302" y="246" text-anchor="middle" font-family="monospace" font-size="16" font-weight="bold" fill="#1e293b">★</text>
+  <text x="370" y="246" text-anchor="middle" font-family="monospace" font-size="20" font-weight="bold" fill="white">OUT</text>
+
+  <!-- Title below board -->
+  <text x="256" y="460" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="800" fill="white" letter-spacing="2">COGNITION</text>
+  <text x="256" y="492" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="600" fill="#fbbf24" letter-spacing="6">BOARD</text>
+
+  <!-- Version badge -->
+  <rect x="380" y="440" width="76" height="24" rx="12" fill="#fbbf24" opacity="0.2"/>
+  <text x="418" y="456" text-anchor="middle" font-family="monospace" font-size="12" font-weight="bold" fill="#fbbf24">v1.0</text>
+</svg>

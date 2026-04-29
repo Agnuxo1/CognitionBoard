@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CognitionBoard — 20 Expert Skills for LLM Agents</title>
+  <meta name="description" content="A 6×4 cognition board system that gives any LLM agent domain-expert depth across science, humanities, and arts — while compressing tokens by 2.7×." />
+  <meta name="keywords" content="LLM agents, AI skills, token compression, cognitive architecture, agent cognition, prompt engineering" />
+  <meta property="og:title" content="CognitionBoard — 20 Expert Skills for LLM Agents" />
+  <meta property="og:description" content="Give your agent a chess board of expert minds. Math, Physics, History, Law — all in one system." />
+  <meta property="og:image" content="https://cognitionboard.pages.dev/og-image.png" />
+  <meta property="og:url" content="https://cognitionboard.pages.dev" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-2: #1e293b;
+      --blue: #3b82f6;
+      --blue-dark: #2563eb;
+      --orange: #f97316;
+      --green: #22c55e;
+      --purple: #a855f7;
+      --yellow: #fbbf24;
+      --text: #f8fafc;
+      --text-dim: #94a3b8;
+      --border: #334155;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: var(--blue); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: radial-gradient(ellipse at 50% 0%, #1e3a5f 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 80%, #312e81 0%, transparent 40%),
+                  var(--bg);
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="none" stroke="%23334155" stroke-width="0.5" opacity="0.3"/></svg>');
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 900px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(59,130,246,0.15);
+      border: 1px solid var(--blue-dark);
+      color: var(--blue);
+      padding: 0.5rem 1.2rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .cb { color: var(--yellow); }
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      color: var(--text-dim);
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--yellow);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .cta-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary {
+      background: var(--blue-dark);
+      color: white;
+      box-shadow: 0 4px 24px rgba(37,99,235,0.4);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(37,99,235,0.5);
+      text-decoration: none;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover {
+      background: var(--bg-2);
+      text-decoration: none;
+    }
+
+    /* Board demo */
+    .board-section {
+      padding: 6rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+    }
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .section-header p {
+      color: var(--text-dim);
+      font-size: 1.125rem;
+    }
+
+    .board-grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+    }
+    .cell {
+      aspect-ratio: 1;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: clamp(0.6rem, 2vw, 1rem);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .cell:hover {
+      transform: scale(1.08);
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+    .cell .cell-icon { font-size: 1.5em; margin-bottom: 2px; }
+    .cell .cell-label { font-size: 0.7em; opacity: 0.7; }
+    .row-a { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+    .row-b { background: linear-gradient(135deg, #f97316, #ea580c); }
+    .row-c { background: linear-gradient(135deg, #22c55e, #16a34a); }
+    .row-d { background: linear-gradient(135deg, #a855f7, #9333ea); }
+    .cell-master {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+      color: #0f172a;
+      box-shadow: 0 0 24px rgba(251,191,36,0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 24px rgba(251,191,36,0.4); }
+      50% { box-shadow: 0 0 40px rgba(251,191,36,0.6); }
+    }
+
+    .path-demo {
+      max-width: 700px;
+      margin: 3rem auto 0;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+    }
+    .path-demo h3 {
+      font-size: 1rem;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .path-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: monospace;
+      font-size: 1.125rem;
+      flex-wrap: wrap;
+    }
+    .path-step {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+    .path-arrow { color: var(--text-dim); font-size: 1.25rem; }
+    .path-desc {
+      margin-top: 0.75rem;
+      color: var(--text-dim);
+      font-size: 0.9375rem;
+    }
+
+    /* Features */
+    .features {
+      padding: 6rem 2rem;
+      background: var(--bg);
+    }
+    .features-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue-dark);
+    }
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .feature-card p {
+      color: var(--text-dim);
+      font-size: 0.9375rem;
+    }
+
+    /* Ecosystem */
+    .ecosystem {
+      padding: 6rem 2rem;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .eco-grid {
+      max-width: 900px;
+      margin: 3rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+    .eco-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem 1rem;
+      transition: all 0.2s;
+    }
+    .eco-item:hover {
+      border-color: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+    .eco-item .eco-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+    .eco-item .eco-name { font-weight: 700; font-size: 0.9375rem; }
+    .eco-item .eco-desc { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+    /* Footer */
+    footer {
+      padding: 3rem 2rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.875rem;
+    }
+    footer a { color: var(--text-dim); }
+    footer a:hover { color: var(--blue); }
+
+    @media (max-width: 640px) {
+      .board-grid { grid-template-columns: repeat(3, 1fr); }
+      .hero-stats { gap: 1.5rem; }
+      .stat-value { font-size: 1.75rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">🧠 Part of the P2PCLAW Ecosystem</div>
+      <h1>
+        Give Your Agent<br/>
+        a <span class="cb">Chess Board</span> of Minds
+      </h1>
+      <p class="hero-subtitle">
+        <strong>CognitionBoard</strong> is a 6×4 grid of 20 expert cognitive skills 
+        that any LLM agent can load to think with domain depth — 
+        while compressing tokens by <strong>2.7×</strong>.
+      </p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-value">20</span>
+          <span class="stat-label">Expert Skills</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">2.7×</span>
+          <span class="stat-label">Token Compression</span>
+        </div>
+        <div class="stat">
+          <span class="stat-value">≤12</span>
+          <span class="stat-label">Char Session Memory</span>
+        </div>
+      </div>
+      <div class="cta-group">
+        <a href="https://github.com/Agnuxo1/CognitionBoard" class="btn btn-primary">
+          ⚡ Get Started on GitHub
+        </a>
+        <a href="#board" class="btn btn-secondary">
+          🎯 See the Board
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Board Demo -->
+  <section class="board-section" id="board">
+    <div class="section-header">
+      <h2>The Cognition Board</h2>
+      <p>Every cell is a skill. The path through cells <em>is</em> the compressed session memory.</p>
+    </div>
+    <div class="board-grid">
+      <!-- Row A -->
+      <div class="cell row-a"><span class="cell-icon">🗜️</span><span class="cell-label">TC</span></div>
+      <div class="cell row-a"><span class="cell-icon">π</span><span class="cell-label">MM</span></div>
+      <div class="cell row-a"><span class="cell-icon">ħ</span><span class="cell-label">PH</span></div>
+      <div class="cell row-a"><span class="cell-icon">⚗️</span><span class="cell-label">CH</span></div>
+      <div class="cell row-a"><span class="cell-icon">🧬</span><span class="cell-label">BIO</span></div>
+      <div class="cell row-a"><span class="cell-icon">💻</span><span class="cell-label">CS</span></div>
+      <!-- Row B -->
+      <div class="cell row-b"><span class="cell-icon">📜</span><span class="cell-label">HIS</span></div>
+      <div class="cell row-b"><span class="cell-icon">☯️</span><span class="cell-label">PHI</span></div>
+      <div class="cell row-b"><span class="cell-icon">🧠</span><span class="cell-label">PSY</span></div>
+      <div class="cell row-b"><span class="cell-icon">🔤</span><span class="cell-label">LIN</span></div>
+      <div class="cell row-b"><span class="cell-icon">🌍</span><span class="cell-label">GEO</span></div>
+      <div class="cell row-b"><span class="cell-icon">📈</span><span class="cell-label">ECO</span></div>
+      <!-- Row C -->
+      <div class="cell row-c"><span class="cell-icon">⚖️</span><span class="cell-label">POL</span></div>
+      <div class="cell row-c"><span class="cell-icon">📋</span><span class="cell-label">LAW</span></div>
+      <div class="cell row-c"><span class="cell-icon">🏥</span><span class="cell-label">MED</span></div>
+      <div class="cell row-c"><span class="cell-icon">🔭</span><span class="cell-label">AST</span></div>
+      <div class="cell row-c"><span class="cell-icon">⚙️</span><span class="cell-label">ENG</span></div>
+      <div class="cell row-c"><span class="cell-icon">🎨</span><span class="cell-label">ART</span></div>
+      <!-- Row D -->
+      <div class="cell row-d"><span class="cell-icon">🌱</span><span class="cell-label">ENV</span></div>
+      <div class="cell row-d"><span class="cell-icon">🎭</span><span class="cell-label">CUL</span></div>
+      <div class="cell row-d"><span class="cell-icon">∑</span><span class="cell-label">SCI+</span></div>
+      <div class="cell row-d"><span class="cell-icon">∫</span><span class="cell-label">HUM+</span></div>
+      <div class="cell cell-master"><span class="cell-icon">★</span><span class="cell-label">MST</span></div>
+      <div class="cell row-d"><span class="cell-icon">📤</span><span class="cell-label">OUT</span></div>
+    </div>
+
+    <div class="path-demo">
+      <h3>Example Session Path</h3>
+      <div class="path-line">
+        <span class="path-step cell-master">★</span>
+        <span class="path-arrow">→</span>
+        <span class="path-step row-a">TC</span>
+        <span class="path-arrow">→</span>
+        <span class="path-step row-a">MM</span>
+        <span class="path-arrow">→</span>
+        <span class="path-step row-b">ECO</span>
+        <span class="path-arrow">→</span>
+        <span class="path-step row-d">OUT</span>
+      </div>
+      <p class="path-desc">
+        <strong>Task:</strong> "Prove Nash equilibria exist in mixed strategies" <br/>
+        <strong>Path:</strong> D5·A1·A2·B6·D6 = <strong>14 characters</strong> = complete session log
+      </p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="section-header">
+      <h2>Why CognitionBoard?</h2>
+      <p>Three core innovations that change how agents think.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3>Domain-Expert Depth</h3>
+        <p>20 specialized skill files covering Math, Physics, Chemistry, Biology, CS, History, Philosophy, Psychology, Linguistics, Geography, Economics, Political Science, Law, Medicine, Astronomy, Engineering, Arts, Environment, and Culture.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗜️</div>
+        <h3>2.7× Token Compression</h3>
+        <p>Formal notation replaces verbose descriptions. "For all x in S, P holds" becomes ∀x∈S: P(x). Average 2.3× output compression, up to 5× on mathematical tasks.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">♟️</div>
+        <h3>Chess-Board Memory</h3>
+        <p>Every session leaves a path trace: D5·A1·A2·B6·D6. That's the complete cognitive history in ≤12 characters. Reproducible, inspectable, portable.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Zero Cloud, 100% Local</h3>
+        <p>All skills are Markdown files. Load them via VS Code extension, CLI, or copy-paste. No API calls, no data leaves your machine. Works with Claude, GPT, Gemini, Kimi, Qwen, any LLM.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>One-Line Integration</h3>
+        <p>Install the VS Code extension, load the Master Skill, and start navigating. Or use the CLI: <code>cb load master</code>. Or just copy-paste the skill files.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧩</div>
+        <h3>Composable & Extensible</h3>
+        <p>Synthesis cells (SCI+, HUM+) chain multiple domains. Add your own skills to the board. The grid expands with your needs.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ecosystem -->
+  <section class="ecosystem">
+    <div class="section-header">
+      <h2>Part of P2PCLAW</h2>
+      <p>CognitionBoard is one agent in a decentralized network of 14 autonomous research agents.</p>
+    </div>
+    <div class="eco-grid">
+      <a href="https://p2pclaw.com" class="eco-item">
+        <div class="eco-emoji">🦀</div>
+        <div class="eco-name">P2PCLAW</div>
+        <div class="eco-desc">Decentralized Science</div>
+      </a>
+      <a href="https://github.com/Agnuxo1/EnigmAgent" class="eco-item">
+        <div class="eco-emoji">🔐</div>
+        <div class="eco-name">EnigmAgent</div>
+        <div class="eco-desc">Secret Vault</div>
+      </a>
+      <a href="https://github.com/Agnuxo1/benchclaw" class="eco-item">
+        <div class="eco-emoji">📊</div>
+        <div class="eco-name">BenchClaw</div>
+        <div class="eco-desc">Agent Benchmark</div>
+      </a>
+      <a href="https://github.com/Agnuxo1/paperclaw-extension" class="eco-item">
+        <div class="eco-emoji">📄</div>
+        <div class="eco-name">PaperClaw</div>
+        <div class="eco-desc">Paper Generator</div>
+      </a>
+      <a href="https://agentboot.pages.dev" class="eco-item">
+        <div class="eco-emoji">🖥️</div>
+        <div class="eco-name">AgentBoot</div>
+        <div class="eco-desc">Bare-Metal OS</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      <strong>CognitionBoard</strong> — 
+      <a href="https://github.com/Agnuxo1/CognitionBoard">GitHub</a> · 
+      <a href="https://p2pclaw.com">P2PCLAW</a> · 
+      <a href="https://huggingface.co/Agnuxo">HuggingFace</a>
+    </p>
+    <p style="margin-top:0.5rem;opacity:0.6;">
+      Created by Francisco Angulo de Lafuente (Agnuxo1) · Apache 2.0 License
+    </p>
+  </footer>
+
+</body>
+</html>
