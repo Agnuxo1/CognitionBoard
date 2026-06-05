@@ -102,4 +102,34 @@ Natural pairings:
   GEO+ENV → environmental geography
 ```
 
-*Skills Index v1.0 | Cognitive Skills Engine | Total: 20 skills + 2 synthesis + 1 output*
+---
+
+## EXTENSION ROW E
+
+These skills extend the stable 6x4 board without changing existing A-D cell
+semantics.
+
+| Code | Symbol | Skill | File | Key Triggers |
+|------|--------|-------|------|-------------|
+| E1 | NEURO | Neuroscientist Mind | extension/neuroscientist-mind.md | neuroscience, BCI, EEG, fMRI, neural decoding |
+| E2 | ANTH | Anthropologist Mind | extension/anthropologist-mind.md | ethnography, kinship, ritual, cultural evolution |
+| E3 | ROB | Roboticist Mind | extension/roboticist-mind.md | robotics, SLAM, navigation, manipulation, ROS |
+
+Extension row paths:
+
+```
+Neuroscience:  D5.A1.E1.D6
+Anthropology:  D5.A1.E2.D6
+Robotics:      D5.A1.E3.D6
+Synthesis:     add D3 and/or D4 before D6 when needed
+```
+
+Natural pairings:
+
+```
+NEURO+CS -> neural decoding / computational neuroscience
+ANTH+CUL -> ethnography / cultural evolution
+ROB+ENG  -> embodied autonomy / control
+```
+
+*Skills Index v1.1 | Cognitive Skills Engine | Total: 23 skills + 2 synthesis + 1 output*
